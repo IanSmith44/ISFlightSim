@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public float speed = 10f;
     Vector3 movement;
-    Vector3 throttle;
+    float throttle;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,11 +22,12 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxis("Rudders");
         movement.z = Input.GetAxis("YokeY");
         //throttle = 1;
-        throttle.x = Input.GetAxis("Throttle");
+        throttle = Input.GetAxis("Throttle");
     }
     void FixedUpdate()
     {
-        rb.AddForce(throttle * speed);
+        Debug.Log(rb.velocity);
+        rb.AddForce(transform.right * throttle * speed);
         transform.Rotate(movement);
     }
 }
